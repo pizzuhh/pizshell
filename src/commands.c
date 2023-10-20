@@ -51,3 +51,11 @@ void HelpMsg(void)
     "exec:\t\texecutes application from the PATH variable\nexit:\t\texits the shell\n"\
     "echo:\t\techos text\n");
 }
+
+void cd(char* args[])
+{
+    if(chdir(args[1]))
+    {
+        fprintf(stderr, "error changing dir to %s\nProbably not found or don't have permision!\n", args[1]);
+    }
+}

@@ -7,7 +7,8 @@ extern void execcmd(int argc, char* args[]);
 
 void signal_handler(int signum) {
     if (signum == SIGINT) {
-        printf("\nRecived CTR+C. The program has been terminated\n");
+        //printf("\nRecived CTR+C. The program has been terminated\n");
+        exit(0);
     } else if (signum == SIGTERM) {
         printf("\nReceived SIGTERM. The program has been terminated.\n");
     }

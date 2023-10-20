@@ -53,6 +53,15 @@ void execcmd(int argc, char* args[])
         {
             HelpMsg();
         }
+        else if(!strcmp(args[0], "cd"))
+        {
+            cd(args);
+        }
+        else if(!strcmp(args[0], "pwd"))
+        {
+            char cwd[MAX_INPUT_SIZE];getcwd(cwd, MAX_INPUT_SIZE);
+            printf("%s\n", cwd);
+        }
         else
         {
             fprintf(stderr, "pizshell: %s: command not found\nrun help to see list of commands\n", args[0]);
