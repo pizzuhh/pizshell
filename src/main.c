@@ -29,6 +29,9 @@ int main()
         }
     }
 
+    if(ENABLE_WELCOME == 1)
+        printf("[pizshell v%s]\n", VESRSION);
+
     signal(SIGINT, signal_handler);
     signal(SIGTERM, signal_handler);
     char* args = (char*)malloc(sizeof(char)*MAX_INPUT_SIZE);
