@@ -70,6 +70,10 @@ void execcmd(int argc, char* args[])
         {
             size(args);
         }
+        else if(!strcmp(args[0], "clear") || !strcmp(args[0], "clr"))
+        {
+            printf("\033[H\033[J");
+        }
         else
         {
             fprintf(stderr, "pizshell: %s: command not found\nrun help to see list of commands\n", args[0]);
