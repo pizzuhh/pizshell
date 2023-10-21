@@ -62,6 +62,14 @@ void execcmd(int argc, char* args[])
             char cwd[MAX_INPUT_SIZE];getcwd(cwd, MAX_INPUT_SIZE);
             printf("%s\n", cwd);
         }
+        else if(!strcmp(args[0], "ls"))
+        {
+            ls(args);
+        }
+        else if(!strcmp(args[0], "size"))
+        {
+            size(args);
+        }
         else
         {
             fprintf(stderr, "pizshell: %s: command not found\nrun help to see list of commands\n", args[0]);
