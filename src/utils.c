@@ -1,4 +1,4 @@
-#include "shell.h"
+#include "./utils.h"
 
 int readstdin(char* buffer, int bufSize, char* msg)
 {
@@ -11,77 +11,43 @@ int readstdin(char* buffer, int bufSize, char* msg)
     return strlen(buffer);
 }
 
-void execcmd(int argc, char* args[])
+char* xor(char* data, char key[], size_t data_size)
 {
-    if(args != 0)
+    size_t key_size = strlen(key);
+    char* out = (char*)malloc(sizeof(char)*data_size);
+    for (size_t i = 0; i < data_size; i++)
     {
-        //test
-        if(!strcmp(args[0], "test"))
-        {
-            printf("Executed test command!\n");
-            if(argc > 1)
-            {
-                for (size_t i = 1; i < argc; i++)
-                {
-                    printf("%s\n", args[i]);
-                }
-                
-            }
-        }
-
-        //exit
-        else if(!strcmp(args[0], "exit"))
-        {
-            pid_t process = getpid();
-            kill(process, SIGKILL);
-        }
-
-        //info
-        else if(!strcmp(args[0], "info"))
-        {
-            Info();
-        }
-        else if(!strcmp(args[0], "echo"))
-        {
-            Echo(args, argc);
-        }
-        else if(!strcmp(args[0], "exec"))
-        {
-            Exec(args);
-        }
-        else if(!strcmp(args[0], "help"))
-        {
-            HelpMsg();
-        }
-        else if(!strcmp(args[0], "cd"))
-        {
-            cd(args);
-        }
-        else if(!strcmp(args[0], "pwd"))
-        {
-            char cwd[MAX_INPUT_SIZE];getcwd(cwd, MAX_INPUT_SIZE);
-            printf("%s\n", cwd);
-        }
-        else if(!strcmp(args[0], "ls"))
-        {
-            ls(args);
-        }
-        else if(!strcmp(args[0], "size"))
-        {
-            size(args);
-        }
-        else if(!strcmp(args[0], "clear") || !strcmp(args[0], "clr"))
-        {
-            printf("\033[H\033[J");
-        }
-        else
-        {
-            fprintf(stderr, "pizshell: %s: command not found\nrun help to see list of commands\n", args[0]);
-        }
+        out[i] = data[i] ^ key[i % key_size];
     }
-    else
+    return out;
+}
+
+char* readfile(char* path)
+{
+    FILE* file = fopen(path, "r");
+    if(!file)
     {
-        perror("invalid (char*)args");
-        exit(1);
+        printf("error opening file: %s\n", path);
+        return "ERR_FOPEN";
     }
+    fseek(file, 0L, SEEK_END);
+    size_t size = ftell(file);
+    fseek(file, 0L, SEEK_SET);
+
+    char* buff = (char*)malloc(sizeof(char)*size);
+
+    fread(buff, size, 1, file);
+    return buff;
+}
+
+size_t writefile(char* path, char* data)
+{
+    FILE* file = fopen(path, "w");
+    if(!file)
+    {
+        printf("error opening file: %s\n", path);
+        return "ERR_FOPEN";
+    }
+    
+    return fwrite(data, strlen(data)+1, 1, file);
 }

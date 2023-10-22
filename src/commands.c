@@ -1,4 +1,5 @@
 #include "shell.h"
+#include "utils.h"
 #include "commmands.h"
 
 void Info(void)
@@ -113,3 +114,29 @@ void size(char* args[])
     else
         printf("%s: %ldbytes\n", file, size);
 }
+
+void cat(char* args[])
+{
+    FILE* file = fopen(args[1], "r");
+    if(!file)
+    {
+        printf("can't open file: %s\n", args[1]);
+        return;
+    }
+    int ch;
+    while ((ch = fgetc(file)) != EOF)
+    {
+        putc(ch, stdout);
+    }
+    putc('\n', stdin);
+}
+
+void xr(char* args[])
+{
+    char* file = args[1];
+    char* key = args[1];
+    char* buf = readfile(file);
+    char* enc = xor(buf, key, strlen(buf));
+    writefile(file, enc);
+}
+

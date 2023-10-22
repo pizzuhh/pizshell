@@ -4,8 +4,8 @@
 #define ZeroMemory(target, size) memset(target, 0, size)
 #define VESRSION "0.1"
 
-#include "commmands.h"
-#include "CONFIG.h"
+#include "./commmands.h"
+#include "./CONFIG.h"
 
 #include <stdio.h>
 #include <stdlib.h>
