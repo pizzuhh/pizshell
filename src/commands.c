@@ -161,7 +161,7 @@ void cat(char* args[])
 void xr(char* args[])
 {
 
-    if(args[1] == NULL)
+    if(args[1] == NULL || args[2] == NULL)
     {
         printf("Usage: xor <path> <key>\nExample: xor /Desktop/folder/file.txt mysecret1234\nBE CAREFUL WITH THIS COMMAND\n");
         return;
