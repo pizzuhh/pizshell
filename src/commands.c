@@ -168,7 +168,7 @@ void xr(char* args[])
     }
 
     char* file = args[1];
-    char* key = args[1];
+    char* key = args[2];
     char* buf = readfile(file);
     size_t buf_size = fsize(file);
     char* enc = xor(buf, key, buf_size);
