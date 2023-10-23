@@ -28,26 +28,61 @@ char* readfile(char* path)
     if(!file)
     {
         printf("error opening file: %s\n", path);
-        return "ERR_FOPEN";
+        return NULL;
+
     }
     fseek(file, 0L, SEEK_END);
     size_t size = ftell(file);
+    if(size < 0)
+    {
+        fclose(file);
+        printf("ftell error\n");
+        return NULL;
+    }
     fseek(file, 0L, SEEK_SET);
+    char* buff = (char*)malloc(sizeof(char)*(size+1));
+    if(!buff)
+    {
+        fclose(file);
+        printf("malloc error\n");
+        return NULL;
+    }
 
-    char* buff = (char*)malloc(sizeof(char)*size);
+    size_t read_size = fread(buff, 1, size, file);
+    fclose(file);
 
-    fread(buff, size, 1, file);
+    if (read_size != size) 
+    {
+        fprintf(stderr, "Error reading file: %s\n", path);
+        free(buff);
+        return NULL;
+    }
     return buff;
 }
 
-size_t writefile(char* path, char* data)
+size_t writefile(char* path, char* data, size_t size)
 {
     FILE* file = fopen(path, "w");
     if(!file)
     {
         printf("error opening file: %s\n", path);
-        return "ERR_FOPEN";
+        return NULL;
     }
-    
-    return fwrite(data, strlen(data)+1, 1, file);
+    size_t ret = fwrite(data, 1, size, file);
+    fclose(file);
+    return ret;
 }
+
+size_t fsize(char* path)
+{
+    FILE* f = fopen(path, "r");
+    if(!f)
+    {
+        printf("fopen() error: file not found\n");
+    }
+    fseek(f, 0L, SEEK_END);
+    size_t size = ftell(f);
+    fclose(f);
+    return size;
+}
+

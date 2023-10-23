@@ -10,5 +10,7 @@
 
 int readstdin(char* buffer, int bufSize, char* msg);
 char* xor(char* data, char key[], size_t data_size);
-size_t writefile(char* path, char* data);
+size_t writefile(char* path, char* data, size_t size);
 char* readfile(char* path);
+size_t fsize(char* path);
+

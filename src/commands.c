@@ -50,11 +50,17 @@ void HelpMsg(void)
     printf("pizhell help:\ntest:\t\ttest command\ninfo:\t\tdisplays some info\n"\
     "exec:\t\texecutes application from the PATH variable\nexit:\t\texits the shell\n"\
     "echo:\t\techos text\npwd:\t\tprints the current working dir\ncd:\t\tchanges directory\n"\
-    "ls:\t\tlists files in a directory\nsize:\t\tprints the size of a file in bytes\n");
+    "ls:\t\tlists files in a directory\nsize:\t\tprints the size of a file in bytes\n"\
+    "xor:\t\tencrypts file using xor\n");
 }
 
 void cd(char* args[])
 {
+    if(args[1] == NULL)
+    {
+        printf("Usage: cd <path>\nExample: cd /Desktop/folder\n");
+        return;
+    }
     if(chdir(args[1]))
     {
         fprintf(stderr, "error changing dir to %s\nProbably not found or don't have permision!\n", args[1]);
@@ -63,6 +69,13 @@ void cd(char* args[])
 
 void ls(char* args[])
 {
+
+    if(args[1] == NULL)
+    {
+        printf("Usage: ls <path>\nExample: ls /Desktop/folder\n");
+        return;
+    }
+
     char path[1024];
     //stuff
     if(args[1] == NULL)
@@ -98,6 +111,13 @@ void ls(char* args[])
 
 void size(char* args[])
 {
+
+    if(args[1] == NULL)
+    {
+        printf("Usage: size <path>\nExample: size /Desktop/folder/file.txt\n");
+        return;
+    }
+
     char* file = args[1];
     char* path = realpath(file, 0);
     char* arg = args[2];
@@ -117,6 +137,13 @@ void size(char* args[])
 
 void cat(char* args[])
 {
+
+    if(args[1] == NULL)
+    {
+        printf("Usage: cat <path>\nExample: cat /Desktop/folder/file.txt\n");
+        return;
+    }
+
     FILE* file = fopen(args[1], "r");
     if(!file)
     {
@@ -133,10 +160,18 @@ void cat(char* args[])
 
 void xr(char* args[])
 {
+
+    if(args[1] == NULL)
+    {
+        printf("Usage: xor <path> <key>\nExample: xor /Desktop/folder/file.txt mysecret1234\nBE CAREFUL WITH THIS COMMAND\n");
+        return;
+    }
+
     char* file = args[1];
     char* key = args[1];
     char* buf = readfile(file);
-    char* enc = xor(buf, key, strlen(buf));
-    writefile(file, enc);
+    size_t buf_size = fsize(file);
+    char* enc = xor(buf, key, buf_size);
+    writefile(file, enc, buf_size);
 }
 
