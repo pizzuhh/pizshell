@@ -13,3 +13,4 @@ This is very basic shell and it's not recommended for everyday use.
 # TODOs
 1. Make so people can add their own commands easily
 2. Make better help command and handle command errors
+3. Fix the `exec` command
