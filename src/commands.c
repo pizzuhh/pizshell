@@ -69,13 +69,6 @@ void cd(char* args[])
 
 void ls(char* args[])
 {
-
-    if(args[1] == NULL)
-    {
-        printf("Usage: ls <path>\nExample: ls /Desktop/folder\n");
-        return;
-    }
-
     char path[1024];
     //stuff
     if(args[1] == NULL)
