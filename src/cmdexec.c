@@ -41,7 +41,7 @@ void execcmd(int argc, char* args[])
         }
         else if(!strcmp(args[0], "help"))
         {
-            HelpMsg();
+            HelpMsg(args);
         }
         else if(!strcmp(args[0], "cd"))
         {

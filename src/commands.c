@@ -45,13 +45,15 @@ int Exec(char* args[])
         return 0;
 }
 
-void HelpMsg(void)
+void HelpMsg(char* args[])
 {
     printf("pizhell help:\ntest:\t\ttest command\ninfo:\t\tdisplays some info\n"\
     "exec:\t\texecutes application from the PATH variable\nexit:\t\texits the shell\n"\
     "echo:\t\techos text\npwd:\t\tprints the current working dir\ncd:\t\tchanges directory\n"\
     "ls:\t\tlists files in a directory\nsize:\t\tprints the size of a file in bytes\n"\
     "xor:\t\tencrypts file using xor\n");
+    //TODO: implement help for commands
+    //e.g help xor will print xor's help
 }
 
 void cd(char* args[])
@@ -107,7 +109,7 @@ void size(char* args[])
 
     if(args[1] == NULL)
     {
-        printf("Usage: size <path>\nExample: size /Desktop/folder/file.txt\n");
+        printf("Usage: size <file>\nExample: size /Desktop/folder/file.txt\n");
         return;
     }
 
@@ -133,7 +135,7 @@ void cat(char* args[])
 
     if(args[1] == NULL)
     {
-        printf("Usage: cat <path>\nExample: cat /Desktop/folder/file.txt\n");
+        printf("Usage: cat <file>\nExample: cat /Desktop/folder/file.txt\n");
         return;
     }
 
@@ -156,7 +158,7 @@ void xr(char* args[])
 
     if(args[1] == NULL || args[2] == NULL)
     {
-        printf("Usage: xor <path> <key>\nExample: xor /Desktop/folder/file.txt mysecret1234\nBE CAREFUL WITH THIS COMMAND\n");
+        printf("Usage: xor <file> <key>\nExample: xor /Desktop/folder/file.txt mysecret1234\nBE CAREFUL WITH THIS COMMAND\n");
         return;
     }
 
