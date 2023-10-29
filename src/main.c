@@ -8,11 +8,11 @@ extern void execcmd(int argc, char* args[]);
 void signal_handler(int signum) {
     if (signum == SIGINT) {
         //printf("\nRecived CTR+C. The program has been terminated\n");
-        exit(0);
+        //exit(0);
     } else if (signum == SIGTERM) {
         printf("\nReceived SIGTERM. The program has been terminated.\n");
     }
-
+    remove("./tmphis");
     exit(0);
 }
 
@@ -35,6 +35,7 @@ int main()
     signal(SIGINT, signal_handler);
     signal(SIGTERM, signal_handler);
     char* args = (char*)malloc(sizeof(char)*MAX_INPUT_SIZE);
+    FILE* tmp = fopen(".pizshell_history", "a+");
     while (1)
     {
         if(getuid() == 0)
@@ -43,12 +44,21 @@ int main()
             readstdin(args, 1024, PROMT_TEXT_USER);
         if (args[0] == '\0' || isspace(args[0])) 
             continue;
+        //write to tmp history file test
         char* out[MAX_ARGS];
         int argc = Parse(args, out);
         execcmd(argc, out);
+        for (size_t i = 0; i < argc; i++)
+        {
+            fwrite(out[i], 1, strlen(out[i]), tmp);
+            putc(' ', tmp);
+        }
+        fputc('\n', tmp);
+        fflush(tmp);
         ZeroMemory(args, 1024);
         
     }
     
-    
+    fclose(tmp);
+    // remove("./.pizshell_history");
 }
