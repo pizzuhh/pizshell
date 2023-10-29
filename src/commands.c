@@ -47,7 +47,7 @@ int Exec(char* args[])
 
 void HelpMsg(char* args[])
 {
-    printf("pizhell help:\ntest:\t\ttest command\ninfo:\t\tdisplays some info\n"\
+    printf("pizshell help:\ntest:\t\ttest command\ninfo:\t\tdisplays some info\n"\
     "exec:\t\texecutes application from the PATH variable\nexit:\t\texits the shell\n"\
     "echo:\t\techos text\npwd:\t\tprints the current working dir\ncd:\t\tchanges directory\n"\
     "ls:\t\tlists files in a directory\nsize:\t\tprints the size of a file in bytes\n"\
