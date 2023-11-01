@@ -2,7 +2,7 @@
 #define MAX_INPUT_SIZE 1024
 #define MAX_ARGS 64
 #define ZeroMemory(target, size) memset(target, 0, size)
-#define VESRSION "0.1"
+#define VESRSION "0.2"
 
 #include "./commmands.h"
 #include "./CONFIG.h"
