@@ -22,27 +22,32 @@ void Echo(char* args[], int argc)
     fputc('\n', stdout);
 }
 
-int Exec(char* args[])
+int Exec(char* args[]) 
 {
     char* cmd = args[1];
     pid_t pid = fork();
-    
 
-        if (pid == 0) {
-            // Child process
-            execlp(cmd, args[2], args[3]);
-
-            // If execlp fails, print an error message
+    if (pid == 0) 
+    {
+        
+        if (execvp(cmd, args + 1) == -1) 
+        {
+            
             perror("Error");
-            return 1;
-        } else if (pid < 0) {
-            // Forking failed
-            perror("Fork failed");
-        } else {
-            // Parent process
-            wait(NULL);
+            exit(1);
         }
-        return 0;
+    } 
+    else if (pid < 0) 
+    {
+        
+        perror("Fork failed");
+    } 
+    else 
+    {
+        
+        wait(NULL);
+    }
+    return 0;
 }
 
 void HelpMsg(char* args[])
