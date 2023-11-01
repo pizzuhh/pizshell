@@ -10,7 +10,8 @@ It's recommended to build it yourself, here's how
 6. now simply run `/build/pizshell`.
 # Note
 This is very basic shell and it's not recommended for everyday use.
+The [releases](https://github.com/pizzuhh/pizshell/releases) are not up to date with the code!
 # TODOs
 1. Make so people can add their own commands easily
-2. Make better help command and handle command errors
-3. Fix the `exec` command
+2. Make better help command and handle command errors (working on)
+3. ~~Fix the `exec` command~~ ✅
