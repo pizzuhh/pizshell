@@ -74,7 +74,8 @@ void execcmd(int argc, char* args[])
         }
         else
         {
-            fprintf(stderr, "pizshell: %s: command not found\nrun help to see list of commands\n", args[0]);
+            //fprintf(stderr, "pizshell: %s: command not found\nrun help to see list of commands\n", args[0]);
+            Exec(args);
         }
     }
     else

@@ -5,9 +5,10 @@ int readstdin(char* buffer, int bufSize, char* msg)
     printf("%s", msg);
     if(fgets(buffer, bufSize, stdin) != NULL)
     {
+        if (buffer == EOF) return 0;
         if( buffer[strlen(buffer)-1] == '\n')
             buffer[strlen(buffer)-1] = '\0';
-    }
+    } else return -1;
     return strlen(buffer);
 }
 

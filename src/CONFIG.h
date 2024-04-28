@@ -6,8 +6,8 @@ defaults to ">"
 PROMT_TEXT_ROOT defines the promt text for root users
 defaults to "#"
 */
-#define PROMT_TEXT_USER "\n>"
-#define PROMT_TEXT_ROOT "\n#"
+#define PROMT_TEXT_USER "\n> "
+#define PROMT_TEXT_ROOT "\n# "
 /*
 ENABLE_ROOT allows if you can execute the shell as root user
 defaults to 1 (true)

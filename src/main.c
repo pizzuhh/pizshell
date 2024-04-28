@@ -38,15 +38,19 @@ int main()
     FILE* tmp = fopen(".pizshell_history", "a+");
     while (1)
     {
+        int readstdingval = 0;
         if(getuid() == 0)
-            readstdin(args, 1024, PROMT_TEXT_ROOT);
+            readstdingval = readstdin(args, 1024, PROMT_TEXT_ROOT);
         else
-            readstdin(args, 1024, PROMT_TEXT_USER);
-        if (args[0] == '\0' || isspace(args[0])) 
+            readstdingval = readstdin(args, 1024, PROMT_TEXT_USER);
+        
+        if (readstdingval < 0) exit(2);
+        if (args[0] == '\0' || isspace(args[0]))
             continue;
         //write to tmp history file test
         char* out[MAX_ARGS];
         int argc = Parse(args, out);
+        if (argc <= 0) continue;
         execcmd(argc, out);
         for (size_t i = 0; i < argc; i++)
         {

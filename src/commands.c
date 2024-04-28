@@ -24,7 +24,7 @@ void Echo(char* args[], int argc)
 
 int Exec(char* args[]) 
 {
-    char* cmd = args[1];
+    char* cmd = args[0];
     pid_t pid = fork();
 
     if (pid == 0) 
@@ -52,11 +52,15 @@ int Exec(char* args[])
 
 void HelpMsg(char* args[])
 {
-    printf("pizshell help:\ntest:\t\ttest command\ninfo:\t\tdisplays some info\n"\
+    printf("pizshell help:\n\
+    test:\t\ttest command\ninfo:\t\tdisplays some info\n"\
     "exec:\t\texecutes application from the PATH variable\nexit:\t\texits the shell\n"\
     "echo:\t\techos text\npwd:\t\tprints the current working dir\ncd:\t\tchanges directory\n"\
     "ls:\t\tlists files in a directory\nsize:\t\tprints the size of a file in bytes\n"\
-    "xor:\t\tencrypts file using xor\n");
+    "xor:\t\tencrypts file using xor\n\n"\
+    "Exit codes:\n\
+    0 - success\n\
+    2 - ctr+d pressed");
     //TODO: implement help for commands
     //e.g help xor will print xor's help
 }
